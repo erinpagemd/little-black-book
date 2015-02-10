@@ -4,15 +4,35 @@ var urlFB = 'https://little-black-book.firebaseio.com/.json';
 $(document).ready(initialize);
 
 function initialize () {
-  //upon initialization, the form has a class of hidden
+
+  //upon initialization, the following are hidden:
+  //login form
+  $('#loginForm').hide();
+  //add contact button
+  $('#addContact').hide();
+  //contact form
+  $('#contactForm').hide();
+  //contact list
+  $('.tableHeader').hide();
+  $('#target').hide();
+
+  //click 'login'
+  $('#login').click(showLogin);
+
   //click 'add new contact' and unhide the form
-  $('#addContact').click(toggleForm);
+  //$('#addContact').click($('#contactForm').toggle());
   //click on the submit button and send the form
   $('#submit').click(sendForm);
   //event handler for remove button has to happen on #target
   $('#target').on('click', '.delete', banishFriend);
   //get the data of people already in firebase
   getData();
+}
+
+//unhide the login form and hides the login button
+function showLogin (event) {
+  $('#loginForm').toggle();
+  $('#login').toggle();
 }
 
 //when i click the remove button, the record is deleted from firebase and remove from view
@@ -77,7 +97,7 @@ function sendForm(event) {
   $('input').val('');
 
   //change the current state of the form: hide the form
-  toggleForm();
+  //$('#contactForm').toggle();
 
   //add info to the contact list.. by load friend??
   getData();
@@ -95,15 +115,3 @@ function stringifyInputValues () {
   var data = JSON.stringify(friend);
   return data;
 }
-
-//change how i hide the form
-//I would just toggle a class of hidden. Much easier
-//then you can do hasClass
-
-//show/hide the form
-function toggleForm () {
-  var $contactForm = $('#contactForm').toggleClass('hidden');
-  return $contactForm;
-}
-
-//remove button

@@ -13,10 +13,33 @@
   <body>
     <h1>Little Black Book</h1>
 
+    <button id='login' class='button expand'>Login</button>
+
+    <form id="loginForm">
+      <div class='row'>
+        <div class='large-3 columns'>
+          <label>Email
+            <input type='email' placeholder='bob@aol.com'></input>
+          </label>
+        </div>
+        <div class='large-3 columns'>
+          <label>Email
+            <input type='password' placeholder='password'></input>
+          </label>
+        </div>
+        <div class='large-3 columns'>
+          <button id='authMe' class='button expand'>Authorize Me!</button>
+        </div>
+        <div class='large-3 columns'>
+          <button id='createAccount' class='button expand'>Create an Account!</button>
+        </div>
+      </div>
+    </form><!--end of login form-->
+
     <button id='addContact' class='button expand'>Add New Contact</button>
 
     <!--new contact form is hidden when first loading the page-->
-    <form id='contactForm' class='hidden'>
+    <form id='contactForm'>
       <div class='row'><!--form row with name-->
         <div class='large-12 columns'>
           <label>Name
