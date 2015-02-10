@@ -1,7 +1,7 @@
 //use dev tool for iife
 
 //upon initialization, the form is hidden
-hideForm();
+//hideForm();
 
 //click 'add new contact' and unhide the form
 $('#addContact').click(showForm);
