@@ -41,9 +41,21 @@ function initialize () {
 }
 
 //authorize,login the user and remove the login form
-//event.preventDefaul
 function authMe (event) {
   event.preventDefault();
+  var emailLogin = $('#emailLogin').val(),
+      passwordLogin = $('#passwordLogin').val(),
+      loginObj = {
+        email: emailLogin,
+        password: passwordLogin
+      };
+  fb.authWithPassword(loginObj, function(error, authData) {
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+    }
+  });
 }
 
 //create an account
@@ -57,8 +69,10 @@ function createAccount (event) {
       };
   fb.createUser(loginObj, function(error) {
     if (error === null) {
+      //login the user
       console.log("User created successfully");
     } else {
+      alert("REJECTED!!");
       console.log("Error creating user:", error);
     }
   });
