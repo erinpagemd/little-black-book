@@ -17,13 +17,37 @@
 
     <!--new contact form is hidden when first loading the page-->
     <form id='contactForm'>
-      <label>Name
-        <input id='name' type='text'></input>
-      </label>
-      <label>Phone #
-        <input id='phone' type='text'></input>
-      </label>
-      
+      <div class='row'><!--form row with name-->
+        <div class='large-12 columns'>
+          <label>Name
+            <input id='name' type='text' placeholder='Enter Name Here'></input>
+          </label>
+        </div>
+      </div>
+      <div class='row'><!--form row with phone and email-->
+        <div class='large-6 columns'>
+          <label>Phone #
+            <input id='phone' type='tel' placeholder="123-456-7890"></input>
+          </label>
+        </div>
+        <div class='large-6 columns'>
+          <label>Email
+            <input id='email' type='email' placeholder="bob@aol.com"></input>
+          </label>
+        </div>
+      </div>
+      <div class='row'><!--form row with twitter and photo-->
+        <div class='large-6 columns'>
+          <label>Twitter Handle
+            <input id='twitter' type='text' placeholder="@bob"></input>
+          </label>
+        </div>
+        <div class='large-6 columns'>
+          <label>Photo URL
+            <input id='photo' type='url' placeholder="http://imgur.com/awesome"></input>
+          </label>
+        </div>
+      </div>
     </form>
 
     <!--load scripts below: jquery lodash main-->
