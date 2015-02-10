@@ -19,6 +19,7 @@ function initialize () {
 
 //get the data
 function getData () {
+  $('#target').empty();
   $.get(urlFB, function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadFriend(uuid, resFB[uuid]);
@@ -53,7 +54,6 @@ function sendForm(event) {
   var friend = {name: $name, phone: $phone, email: $email, twitter: $twitter, photoURL: $url}
   var data = JSON.stringify(friend);
   $.post(urlFB, data, function(res){
-    console.log(res);
   })
 
   //clear the input fields
@@ -67,7 +67,7 @@ function sendForm(event) {
   hideForm();
 
   //add info to the contact list
-
+  getData();
 }
 
 //change how i hide the form
