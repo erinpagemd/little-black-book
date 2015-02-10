@@ -12,6 +12,9 @@ function initialize () {
   $('#submit').click(sendForm);
 }
 
+//display the contents of the json on the page
+
+
 function sendForm(event) {
   event.preventDefault();
 
