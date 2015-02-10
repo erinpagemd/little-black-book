@@ -43,6 +43,8 @@ function loadFriend (uuid, data) {
   friends.push(makeFriendDiv(uuid, data));
 
   $('#target').append(friends);
+
+  return friends;
 }
 
 function makeFriendDiv (uuid, data) {

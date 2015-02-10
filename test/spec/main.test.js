@@ -22,6 +22,19 @@ describe('getData', function () {
 describe('loadFriend', function () {
   it('should put a div in the view', function () {
     //do stuff here
+    //$('#target').empty();
+    var data = {
+      name: "Mary",
+      phone: "555-555-5555",
+      email: "mary@aol.com",
+      twitter: "@mary",
+      photoURL: "http://i.imgur.com/L6wjzi7.jpg"
+    };
+    var uuid = '-JhlvtoxluCmZfaDs0fD';
+    //run it!
+    var friends = loadFriend(uuid, data);
+    expect(friends.length).to.equal(1);
+
   });
 });//end loadFriend
 
@@ -37,7 +50,11 @@ describe('makeFriendDiv', function () {
     var uuid = 'JhlvtoxluCmZfaDs0fD';
     //i have to run it
     makeFriendDiv(uuid, data);
-    expect('.tableBody').to.exist;
+    expect(".tableBody").to.exist;
+    //expect it to have a data-uuid attribute equal to uuid
+    //expect($(".tableBody").attr(data-uuid)).to.equal(uuid);
+    //expect it to have 6 children
+    //expect($(".tablebody").children().length).to.equal('6');
   });
 });//end makeFriendDiv
 
