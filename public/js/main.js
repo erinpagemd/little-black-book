@@ -93,7 +93,7 @@ function banishFriend (event) {
   var $divToRemove = $(event.target).parent().parent();
   var uuid = $divToRemove.data('uuid');
 
-  var urlItem = FIREBASE_URL + uuid + '.json';
+  var urlItem = usersFbUrl + '/contacts/' + uuid + '.json';
   $.ajax(urlItem, {type: 'DELETE'});
 
   $divToRemove.remove();
