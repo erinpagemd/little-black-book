@@ -10,14 +10,39 @@ function initialize () {
   $('#addContact').click(showForm);
   //click on the submit button and send the form
   $('#submit').click(sendForm);
+  //get the data of people already in firebase
+  getData();
 }
 
 //display the contents of the json on the page
+  //put the data on the page
 
+//get the data
+function getData () {
+  $.get(urlFB, function(resFB){
+    Object.keys(resFB).forEach(function(uuid){
+      loadFriend(uuid, resFB[uuid]);
+    })
+  });
+}
+
+function loadFriend (uuid, data) {
+  var friends = [];
+  var $div = $('<div class="row"></div>');
+
+  //making the list of items to append to the main div
+  var $divName = $('<div class="large-2 columns">' + data.name + '</div>');
+
+  $div.append($divName);
+  $div.attr('data-uuid', uuid);
+
+  friends.push($div);
+
+  $('#target').append(friends);
+}
 
 function sendForm(event) {
   event.preventDefault();
-
   //grab all of the information
   var $name = $('#name').val();
   var $phone = $('#phone').val();
