@@ -31,7 +31,7 @@ function initialize () {
   //$('#addContact').click($('#contactForm').toggle());
 
   //click on the submit button and send the form
-  $('#submit').click(sendForm);
+  $('#submitContact').click(sendContactForm);
 
   //event handler for remove button has to happen on #target
   $('#target').on('click', '.delete', banishFriend);
@@ -76,6 +76,10 @@ function createAccount (event) {
       console.log("Error creating user:", error);
     }
   });
+  //hide the login form
+  $('#loginForm').toggle();
+  //show contact form
+  $('#contactForm').toggle();
 }
 
 //unhide the login form and hides the login button
@@ -98,7 +102,7 @@ function banishFriend (event) {
 //get the data
 function getData () {
   $('#target').empty();
-  $.get(FIREBASE_URL, function(resFB){
+  $.get(usersFbUrl + '/contacts.json', function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadFriend(uuid, resFB[uuid]);
     })
@@ -137,16 +141,22 @@ function makeFriendDiv (uuid, data) {
   return $div;
 }
 
-function sendForm(event) {
+function sendContactForm(event) {
   event.preventDefault();
+  usersFbUrl = FIREBASE_URL + '/users/' + fb.getAuth().uid + '/data';
   //grab all of the information and post to firebase
-  $.post(FIREBASE_URL, stringifyInputValues(), function(res){});
+  $.post(usersFbUrl + '/contacts.json', stringifyInputValues(), function(res){});
 
   //clear the input fields
   $('input').val('');
 
-  //change the current state of the form: hide the form
-  //$('#contactForm').toggle();
+  //hide the form
+  $('#contactForm').toggle();
+  //show the add contact button
+  $('#addContact').toggle();
+  //show the contact list
+  $('.tableHeader').toggle();
+  $('#target').toggle();
 
   //add info to the contact list.. by load friend??
   getData();
