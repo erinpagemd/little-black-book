@@ -39,6 +39,13 @@ function getData () {
 
 function loadFriend (uuid, data) {
   var friends = [];
+
+  friends.push(makeFriendDiv(uuid, data));
+
+  $('#target').append(friends);
+}
+
+function makeFriendDiv (uuid, data) {
   var $div = $('<div class="row tableBody"></div>');
 
   //making the list of items to append to the main div
@@ -57,24 +64,13 @@ function loadFriend (uuid, data) {
   $div.append($divButton);
   $div.attr('data-uuid', uuid);
 
-  friends.push($div);
-
-  $('#target').append(friends);
+  return $div;
 }
 
 function sendForm(event) {
   event.preventDefault();
-  //grab all of the information
-  var $name = $('#name').val();
-  var $phone = $('#phone').val();
-  var $email = $('#email').val();
-  var $twitter = $('#twitter').val();
-  var $url = $('#photo').val();
-
-  var friend = {name: $name, phone: $phone, email: $email, twitter: $twitter, photoURL: $url}
-  var data = JSON.stringify(friend);
-  $.post(urlFB, data, function(res){
-  })
+  //grab all of the information and post to firebase
+  $.post(urlFB, stringifyInputValues(), function(res){});
 
   //clear the input fields
   $('input').val('');
@@ -84,6 +80,19 @@ function sendForm(event) {
 
   //add info to the contact list.. by load friend??
   getData();
+}
+
+//grab all of the input information and turn it into json
+function stringifyInputValues () {
+  var $name = $('#name').val();
+  var $phone = $('#phone').val();
+  var $email = $('#email').val();
+  var $twitter = $('#twitter').val();
+  var $url = $('#photo').val();
+
+  var friend = {name: $name, phone: $phone, email: $email, twitter: $twitter, photoURL: $url}
+  var data = JSON.stringify(friend);
+  return data;
 }
 
 //change how i hide the form
