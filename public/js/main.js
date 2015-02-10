@@ -1,4 +1,6 @@
 //use dev tool for iife??
+var urlFB = 'https://little-black-book.firebaseio.com/.json';
+
 $(document).ready(initialize);
 
 function initialize () {
@@ -12,6 +14,8 @@ function initialize () {
 
 function sendForm(event) {
   event.preventDefault();
+
+  //grab all of the information
   var $name = $('#name').val();
   var $phone = $('#phone').val();
   var $email = $('#email').val();
@@ -19,10 +23,16 @@ function sendForm(event) {
   var $url = $('#photo').val();
 
   console.log($name, $phone, $email, $twitter, $url);
+
+  var friend = {name: $name, phone: $phone, email: $email, twitter: $twitter, photoURL: $url}
+  var data = JSON.stringify(friend);
+  $.post(urlFB, data, function(res){
+    console.log(res);
+  })
 }
 
-//post the form
-  //grab all of the information
+
+
   //post it to firebase
   //clear the form
   //hide the form
@@ -41,11 +51,7 @@ function hideForm () {
 }
 
 
-//new contact form
-  //name, phone number, email, twitter handle, photo url
-  //submit
   //on submit contact form disappears
-  //prevent default
   //POST to firebase
   //display on the page the new information
 
