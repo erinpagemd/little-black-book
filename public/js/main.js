@@ -33,7 +33,7 @@ function loadFriend (uuid, data) {
       $divPhone = $('<div class="large-2 columns">' + data.phone + '</div>'),
       $divEmail = $('<div class="large-2 columns">' + data.email + '</div>'),
       $divTwitter = $('<div class="large-2 columns">' + data.twitter + '</div>'),
-      $divPhoto = $('<div class="large-2 columns"><object data="' + data.photoURL + '" type="image/jpg"><img src="http://i.imgur.com/hFXVIaV.jpg"></img></object></div>'),
+      $divPhoto = $('<div class="large-2 columns"><object id="portrait" data="' + data.photoURL + '" type="image/jpg"><img src="http://i.imgur.com/hFXVIaV.jpg"></img></object></div>'),
       $divButton = $('<div class="large-2 columns"><button class="delete button alert">Banished</button></div>')
 
   $div.append($divName);

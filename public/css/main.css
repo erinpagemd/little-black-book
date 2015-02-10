@@ -2,8 +2,10 @@ h1 {
   text-align: center;
 }
 
-img {
-  width: 100px;
+#portrait {
+  width: auto;
+  height: 100px;
+  max-width: 120px;
 }
 
 .large-2 {
