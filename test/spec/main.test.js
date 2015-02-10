@@ -49,12 +49,12 @@ describe('makeFriendDiv', function () {
     };
     var uuid = 'JhlvtoxluCmZfaDs0fD';
     //i have to run it
-    makeFriendDiv(uuid, data);
-    expect(".tableBody").to.exist;
+    var friendDiv = makeFriendDiv(uuid, data);
+    expect(friendDiv).to.exist;
     //expect it to have a data-uuid attribute equal to uuid
-    //expect($(".tableBody").attr(data-uuid)).to.equal(uuid);
+    //expect(friendDiv.attr(data-uuid)).to.equal(uuid);
     //expect it to have 6 children
-    //expect($(".tablebody").children().length).to.equal('6');
+    expect(friendDiv.children().length).to.equal(6);
   });
 });//end makeFriendDiv
 
