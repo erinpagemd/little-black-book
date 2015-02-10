@@ -26,8 +26,18 @@ describe('loadFriend', function () {
 });//end loadFriend
 
 describe('makeFriendDiv', function () {
-  it('should make a div with all contact input info', function () {
-    //do stuff here
+  it('should make a div with a class of "tableBody"', function () {
+    var data = {
+      name: "Mary",
+      phone: "555-555-5555",
+      email: "mary@aol.com",
+      twitter: "@mary",
+      photoURL: "http://i.imgur.com/L6wjzi7.jpg"
+    };
+    var uuid = 'JhlvtoxluCmZfaDs0fD';
+    //i have to run it
+    makeFriendDiv(uuid, data);
+    expect('.tableBody').to.exist;
   });
 });//end makeFriendDiv
 
