@@ -2,7 +2,7 @@ h1 {
   text-align: center;
 }
 
-#portrait {
+#portrait, image {
   width: auto;
   height: 100px;
   max-width: 120px;

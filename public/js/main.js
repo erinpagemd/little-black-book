@@ -10,8 +10,21 @@ function initialize () {
   $('#addContact').click(showForm);
   //click on the submit button and send the form
   $('#submit').click(sendForm);
+  //event handler for remove button has to happen on #target
+  $('#target').on('click', '.delete', banishFriend);
   //get the data of people already in firebase
   getData();
+}
+
+//when i click the remove button, the record is deleted from firebase and remove from view
+function banishFriend (event) {
+  var $divToRemove = $(event.target).parent().parent();
+  var uuid = $divToRemove.data('uuid');
+
+  var urlItem = 'https://little-black-book.firebaseio.com/' + uuid + '.json';
+  $.ajax(urlItem, {type: 'DELETE'});
+
+  $divToRemove.remove();
 }
 
 //get the data
@@ -64,16 +77,12 @@ function sendForm(event) {
   })
 
   //clear the input fields
-  var $name = $('#name').val(' ');
-  var $phone = $('#phone').val(' ');
-  var $email = $('#email').val(' ');
-  var $twitter = $('#twitter').val(' ');
-  var $url = $('#photo').val(' ');
+  $('input').val('');
 
   //hide the form
   hideForm();
 
-  //add info to the contact list
+  //add info to the contact list.. by load friend??
   getData();
 }
 
