@@ -23,3 +23,7 @@ h1 {
   background-color: #675980;
   color: white;
 }
+
+.hidden {
+  display: none;
+}

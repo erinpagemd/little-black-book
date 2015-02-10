@@ -4,10 +4,9 @@ var urlFB = 'https://little-black-book.firebaseio.com/.json';
 $(document).ready(initialize);
 
 function initialize () {
-  //upon initialization, the form is hidden
-  hideForm();
+  //upon initialization, the form has a class of hidden
   //click 'add new contact' and unhide the form
-  $('#addContact').click(showForm);
+  $('#addContact').click(toggleForm);
   //click on the submit button and send the form
   $('#submit').click(sendForm);
   //event handler for remove button has to happen on #target
@@ -77,8 +76,8 @@ function sendForm(event) {
   //clear the input fields
   $('input').val('');
 
-  //hide the form
-  hideForm();
+  //change the current state of the form: hide the form
+  toggleForm();
 
   //add info to the contact list.. by load friend??
   getData();
@@ -101,15 +100,9 @@ function stringifyInputValues () {
 //I would just toggle a class of hidden. Much easier
 //then you can do hasClass
 
-//show the form
-function showForm () {
-  var $contactForm = $('#contactForm').show();
-  return $contactForm;
-}
-
-//hide the form
-function hideForm () {
-  var $contactForm = $('#contactForm').hide();
+//show/hide the form
+function toggleForm () {
+  var $contactForm = $('#contactForm').toggleClass('hidden');
   return $contactForm;
 }
 

@@ -2,6 +2,14 @@
 
 //remember! tests depend on other tests. data you put out should be cleared at the end of the test
 
+describe('beforeEach test', function () {
+  beforeEach(function(done){
+    $('#contactForm').addClass('hidden');
+    $('#target').empty();
+    done();
+  });
+});
+
 describe('test suite', function () {
   it('should assert true', function () {
     true.should.be.true;
@@ -25,7 +33,6 @@ describe('getData', function () {
 describe('loadFriend', function () {
   it('should put a div in the view', function () {
     //do stuff here
-    //$('#target').empty();
     var data = {
       name: "Mary",
       phone: "555-555-5555",
@@ -40,7 +47,6 @@ describe('loadFriend', function () {
 
   });
   //empty the div for the next test
-  $('#target').empty();
 });//end loadFriend
 
 describe('makeFriendDiv', function () {
@@ -56,15 +62,11 @@ describe('makeFriendDiv', function () {
     //i have to run it
     var friendDiv = makeFriendDiv(uuid, data);
     expect(friendDiv).to.exist;
-    //expect friendDiv to be an object
-    expect(friendDiv).to.be.an('object');
     //expect it to have a data-uuid attribute equal to uuid
     expect(friendDiv.attr('data-uuid')).to.equal(uuid);
     //expect it to have 6 children
     expect(friendDiv.children().length).to.equal(6);
   });
-  //empty the target at the end of the test
-  $('#target').empty();
 });//end makeFriendDiv
 
 //isn't reading on preventDefault()... issue pass it an event!?!
@@ -73,17 +75,22 @@ describe('makeFriendDiv', function () {
 //test that it clears the info
 describe('sendForm', function () {
   it('should clear the values of the input fields', function(){
-    // $('#name').val('bob');
-    // $('#phone').val('555-555-5555');
-    // $('#email').val('bob@aol.com');
-    // $('#twitter').val('@bob');
-    // $('#photo').val('http:imgur.com/bob');
-    // var event = {
-    //   originalEvent: MouseEvent,
-    //   type: "click"
-    // };
-    // var sentForm = sendForm(event);
-    // expect($("#name").val()).to.equal(' ');
+    var $name = $('#name'),
+        $phone = $('#phone'),
+        $email = $('#email'),
+        $twitter = $('#twitter');
+        $photo = $('#photo');
+    console.log($name);//right back to this same object or whatever it is!!
+
+    $name.val('bob');
+    $phone.val('555-555-5555');
+    $email.val('bob@aol.com');
+    $twitter.val('@bob');
+    $photo.val('http:imgur.com/bob');
+
+    //simulate the click event that triggers sendForm
+    $('#submit').click();
+    expect($name.val()).to.equal(' ');
   });
 });
 
@@ -100,20 +107,14 @@ describe('stringifyInputValues', function () {
   });
 });//end stringifyInputValues
 
-describe('showForm', function () {
-  it('should give a style attribute of "display:block" to the form', function () {
-    //same issue as below accessing the style attribute of undefined!! b/c it is a jquery object??
-  })
-})
-
-describe('hideForm', function () {
-  it('should give a style attribute of "display:none" to the form', function () {
-    //style='display:none'
-    //hideForm();
+describe('toggleForm', function () {
+  it('should toggle the class of hidden', function () {
+    //removes the class of hidden from form
+    // toggleForm();
     //
-    //to have property of style??
-    //var $displayAttr = $('#contactForm').style();
-    //console.log($displayAttr.width);
-    //expect($displayAttr.display).to.equal('none');
-  });
-});
+    // var $hiddenClass = $('#contactForm').hasClass('hidden');
+    // console.log($hiddenClass);
+    // expect($hiddenClass).to.be.ok;
+
+  })
+})//end showForm
