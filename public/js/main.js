@@ -14,9 +14,6 @@ function initialize () {
   getData();
 }
 
-//display the contents of the json on the page
-  //put the data on the page
-
 //get the data
 function getData () {
   $('#target').empty();
@@ -29,12 +26,22 @@ function getData () {
 
 function loadFriend (uuid, data) {
   var friends = [];
-  var $div = $('<div class="row"></div>');
+  var $div = $('<div class="row tableBody"></div>');
 
   //making the list of items to append to the main div
-  var $divName = $('<div class="large-2 columns">' + data.name + '</div>');
+  var $divName = $('<div class="large-2 columns">' + data.name + '</div>'),
+      $divPhone = $('<div class="large-2 columns">' + data.phone + '</div>'),
+      $divEmail = $('<div class="large-2 columns">' + data.email + '</div>'),
+      $divTwitter = $('<div class="large-2 columns">' + data.twitter + '</div>'),
+      $divPhoto = $('<div class="large-2 columns"><object data="' + data.photoURL + '" type="image/jpg"><img src="http://i.imgur.com/hFXVIaV.jpg"></img></object></div>'),
+      $divButton = $('<div class="large-2 columns"><button class="delete button alert">Banished</button></div>')
 
   $div.append($divName);
+  $div.append($divPhone);
+  $div.append($divEmail);
+  $div.append($divTwitter);
+  $div.append($divPhoto);
+  $div.append($divButton);
   $div.attr('data-uuid', uuid);
 
   friends.push($div);
@@ -86,11 +93,4 @@ function hideForm () {
   return $contactForm;
 }
 
-
-  //on submit contact form disappears
-  //POST to firebase
-  //display on the page the new information
-
-//contact list
-  //displays a row with: small photo or placeholder image, name, phone number, email, twitter
-  //remove button
+//remove button
