@@ -22,21 +22,29 @@ function sendForm(event) {
   var $twitter = $('#twitter').val();
   var $url = $('#photo').val();
 
-  console.log($name, $phone, $email, $twitter, $url);
-
   var friend = {name: $name, phone: $phone, email: $email, twitter: $twitter, photoURL: $url}
   var data = JSON.stringify(friend);
   $.post(urlFB, data, function(res){
     console.log(res);
   })
+
+  //clear the input fields
+  var $name = $('#name').val(' ');
+  var $phone = $('#phone').val(' ');
+  var $email = $('#email').val(' ');
+  var $twitter = $('#twitter').val(' ');
+  var $url = $('#photo').val(' ');
+
+  //hide the form
+  hideForm();
+
+  //add info to the contact list
+
 }
 
-
-
-  //post it to firebase
-  //clear the form
-  //hide the form
-  //add info to the contact list
+//change how i hide the form
+//I would just toggle a class of hidden. Much easier
+//then you can do hasClass
 
 //show the form
 function showForm () {

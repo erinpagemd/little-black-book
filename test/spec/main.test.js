@@ -8,13 +8,11 @@ describe('test suite', function () {
 });
 
 // describe('hideForm', function () {
-//   //it('should give a style attribute of "display: none" to the form', function () {
+//   it('should give a style attribute of "display: none" to the form', function () {
 //     //style='display:none'
-//     //var = the style attribute on the element with id
-//     // hideForm();
-//     // var $styleAttr = $('#contactForm').attr('style');
-//     // expect($styleAttr).to.equal('display:none');
-//     //expect that var to equal 'display:none'
+//     hideForm();
+//     var displayAttr = document.querySelector('#contactForm').style.display;
+//     expect(displayAttr).to.equal('none');
 //   });
 // });
 
