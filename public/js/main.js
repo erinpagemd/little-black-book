@@ -1,12 +1,19 @@
+//use dev tool for iife
+
 //upon initialization, the form is hidden
-hiddenForm();
+hideForm();
 
-//first i need a new contact button
-var $addContact = $('#addContact');
-  //click on the button and unhide it
+//click 'add new contact' and unhide the form
+$('#addContact').click(showForm);
 
-//create hidden form
-function hiddenForm () {
+//show the form
+function showForm () {
+  var $contactForm = $('#contactForm').show();
+  return $contactForm;
+}
+
+//hide the form
+function hideForm () {
   var $contactForm = $('#contactForm').hide();
   return $contactForm;
 }
