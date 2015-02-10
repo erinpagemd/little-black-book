@@ -12,6 +12,7 @@ describe('test suite', function () {
 describe('banishFriend', function () {
   it('should delete the person from the view', function () {
     //do stuff here
+    //before this function is ran, length = x. after length = x-1
   });
 });//end banishFriend
 
@@ -38,6 +39,8 @@ describe('loadFriend', function () {
     expect(friends.length).to.equal(1);
 
   });
+  //empty the div for the next test
+  $('#target').empty();
 });//end loadFriend
 
 describe('makeFriendDiv', function () {
@@ -53,11 +56,15 @@ describe('makeFriendDiv', function () {
     //i have to run it
     var friendDiv = makeFriendDiv(uuid, data);
     expect(friendDiv).to.exist;
+    //expect friendDiv to be an object
+    expect(friendDiv).to.be.an('object');
     //expect it to have a data-uuid attribute equal to uuid
-    //expect(friendDiv.attr(data-uuid)).to.equal(uuid);
+    expect(friendDiv.attr('data-uuid')).to.equal(uuid);
     //expect it to have 6 children
     expect(friendDiv.children().length).to.equal(6);
   });
+  //empty the target at the end of the test
+  $('#target').empty();
 });//end makeFriendDiv
 
 //isn't reading on preventDefault()... issue pass it an event!?!
@@ -102,8 +109,11 @@ describe('showForm', function () {
 describe('hideForm', function () {
   it('should give a style attribute of "display:none" to the form', function () {
     //style='display:none'
-    // hideForm();
-    // var displayAttr = document.querySelector('#contactForm').style;
-    // expect(displayAttr).to.equal('none');
+    //hideForm();
+    //
+    //to have property of style??
+    //var $displayAttr = $('#contactForm').style();
+    //console.log($displayAttr.width);
+    //expect($displayAttr.display).to.equal('none');
   });
 });
