@@ -1,5 +1,7 @@
 //use dev tool for iife??
-var urlFB = 'https://little-black-book.firebaseio.com/.json';
+var FIREBASE_URL = 'https://little-black-book.firebaseio.com/',
+    fb = new Firebase(FIREBASE_URL),
+    usersFbUrl;
 
 $(document).ready(initialize);
 
@@ -19,14 +21,47 @@ function initialize () {
   //click 'login'
   $('#login').click(showLogin);
 
+  //click Authorize Me!
+  $('#authMe').click(authMe);
+
+  //click Create an Account!
+  $('#createAccount').click(createAccount);
+
   //click 'add new contact' and unhide the form
   //$('#addContact').click($('#contactForm').toggle());
+
   //click on the submit button and send the form
   $('#submit').click(sendForm);
+
   //event handler for remove button has to happen on #target
   $('#target').on('click', '.delete', banishFriend);
+
   //get the data of people already in firebase
   getData();
+}
+
+//authorize,login the user and remove the login form
+//event.preventDefaul
+function authMe (event) {
+  event.preventDefault();
+}
+
+//create an account
+function createAccount (event) {
+  event.preventDefault();
+  var emailLogin = $('#emailLogin').val(),
+      passwordLogin = $('#passwordLogin').val(),
+      loginObj = {
+        email: emailLogin,
+        password: passwordLogin
+      };
+  fb.createUser(loginObj, function(error) {
+    if (error === null) {
+      console.log("User created successfully");
+    } else {
+      console.log("Error creating user:", error);
+    }
+  });
 }
 
 //unhide the login form and hides the login button
@@ -40,7 +75,7 @@ function banishFriend (event) {
   var $divToRemove = $(event.target).parent().parent();
   var uuid = $divToRemove.data('uuid');
 
-  var urlItem = 'https://little-black-book.firebaseio.com/' + uuid + '.json';
+  var urlItem = FIREBASE_URL + uuid + '.json';
   $.ajax(urlItem, {type: 'DELETE'});
 
   $divToRemove.remove();
@@ -49,7 +84,7 @@ function banishFriend (event) {
 //get the data
 function getData () {
   $('#target').empty();
-  $.get(urlFB, function(resFB){
+  $.get(FIREBASE_URL, function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadFriend(uuid, resFB[uuid]);
     })
@@ -91,7 +126,7 @@ function makeFriendDiv (uuid, data) {
 function sendForm(event) {
   event.preventDefault();
   //grab all of the information and post to firebase
-  $.post(urlFB, stringifyInputValues(), function(res){});
+  $.post(FIREBASE_URL, stringifyInputValues(), function(res){});
 
   //clear the input fields
   $('input').val('');
