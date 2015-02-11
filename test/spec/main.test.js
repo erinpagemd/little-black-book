@@ -27,6 +27,16 @@ describe('authMe', function () {
   })
 })
 
+describe('createAccount', function () {
+  it('should create an account in firebase', function () {
+    //stuff here
+  })
+})
+
+describe('showLogin', function () {
+  it('should unhide the login form')
+})
+
 describe('banishFriend', function () {
   it('should delete the person from the view', function () {
     //do stuff here

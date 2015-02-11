@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '0.10'
+  - '0.10'
 before_install:
   - npm install -g npm
   - npm install -g bower
@@ -11,7 +11,12 @@ script:
   - npm run test -- karma.conf.js
 after_script:
   - cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
+after_success:
+  - npm install -g firebase-tools
+  - if [["$TRAVIS_PULL_REQUEST" == "false"]] && [["$TRAVIS_BRANCH" == 'master']]; then npm run deploy; fi
 env:
   global:
     - secure: JexdxFWAOamUW5lxU3PQ+3lUtbKWUQr1yAZ72C9eC5sH/6T1bDb+1a4r3amDBgPWJYQA8u2flx8/+wwl0oTP9hJVbvAeRbiHO0DvHVGkXWVB4e6yMS6OzuRpc6wwnYgq8o4W9Ww9dn3OJVgi6s0zOv+AHDk3OCjXEUgAaU2GF+g=
     - secure: wKXyA1C7fMehiNZwd9f5fERPM1pm1972sYM7SV1+FNjfShZXtBTxd0yrv6I1+4G9w8l0F3PZ5ZF/pEtqofOI9n+e4ygrrhLzQxjG+oy6wfRJlHfBFfvJYDPLxgQQHFAQPKQLMks10y+q7mTtwOng7t9guffzAesbKcxBsw6KSdY=
+    - secure: nOL/RFEUCs0u3q0MKVv9XiPt1JZgIo4m2Uu3lcwdi8X/4vavLy2D6aYX+PebrfcwtbDvm+yIkR1eYhVDxWmFgw1CABXNsGvZtvaGrtGbjdMgib4kGthla1FN3/DPxHhj3BgxZjdiSu9Wu6NFqjbCCdNsnTZ6Zt8djSfsBFV6Jkg=
+    - secure: KrfCnAw+rszZpmv7IfAZ4Jnv16++5N/ecwudbw4Y/4/aBigOBXKaaAu0cYm/LDlCOq6kAIlp1D0uRIrt+j87sR6ad5lstXyWpSvJVJpjOOi+UVsiltriK2/WDMXa8Tb0satNV9pCDi2Zjafk8lGXJg4Ez8LbwCCKnA87diKP++E=

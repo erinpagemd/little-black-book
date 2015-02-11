@@ -1,0 +1,9 @@
+{
+  "firebase": "little-black-book",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
