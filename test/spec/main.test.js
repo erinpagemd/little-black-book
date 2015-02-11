@@ -15,6 +15,18 @@ describe('test suite', function () {
   });
 });//end test suite
 
+describe('logout', function () {
+  it('should log out', function () {
+    //stuff here
+  })
+})
+
+describe('authMe', function () {
+  it('should auth the user in firebase', function () {
+    //stuff here
+  })
+})
+
 describe('banishFriend', function () {
   it('should delete the person from the view', function () {
     //do stuff here

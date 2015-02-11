@@ -71,7 +71,7 @@ function authMe (event) {
       };
   fb.authWithPassword(loginObj, function(error, authData) {
     if (error) {
-      alert('Rejected!!', error)
+      alert('Rejected!!  ' + error.code)
       console.log("Login Failed!", error);
     } else {
       //hide the login
@@ -105,21 +105,19 @@ function createAccount (event) {
     if (error === null) {
       //login the user
       authMe(event);
+      //show contact form
+      $('#contactForm').toggle();
+      //hide add contact button
+      $('#addContact').toggle();
+      //hide the contact list ... they do not have one yet!
+      $('.tableHeader').toggle();
       console.log("User created successfully");
     } else {
-      alert("REJECTED!!");
+      alert("REJECTED!!  " + error.code );
       console.log("Error creating user:", error);
     }
   });
-  //hide the login form
-  //$('#loginForm').toggle();
-  //show contact form
-  $('#contactForm').toggle();
-  //hide add contact button
-  $('#addContact').toggle();
-  //hide the contact list ... they do not have one yet!
-  $('.tableHeader').toggle();
-}
+}//end create account
 
 //unhide the login form and hides the login button
 function showLogin (event) {
