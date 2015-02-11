@@ -6,38 +6,58 @@ var FIREBASE_URL = 'https://little-black-book.firebaseio.com/',
 $(document).ready(initialize);
 
 function initialize () {
+  //if already logged in, (ie getAuth is true)
+  if(fb.getAuth()) {
+    //hide the login button
+    $('#login').hide();
+    //hide the login form
+    $('#loginForm').hide();
+    //hide the contact form
+    $('#contactForm').hide();
 
-  //upon initialization, the following are hidden:
-  //login form
-  $('#loginForm').hide();
-  //add contact button
-  $('#addContact').hide();
-  //contact form
-  $('#contactForm').hide();
-  //contact list
-  $('.tableHeader').hide();
-  $('#target').hide();
+    usersFbUrl = FIREBASE_URL + '/users/' + fb.getAuth().uid + '/data';
+    getData();
 
+  } else {
+    //if not logged in when first coming to the page, the following are hidden:
+    //login form
+    $('#loginForm').hide();
+    //add contact button
+    $('#addContact').hide();
+    //contact form
+    $('#contactForm').hide();
+    //contact list
+    $('.tableHeader').hide();
+    $('#target').hide();
+
+  }
+  /////////////////////////////////////
+  //button events//////////////////////
+  ////////////////////////////////////
   //click 'login'
   $('#login').click(showLogin);
-
   //click Authorize Me!
   $('#authMe').click(authMe);
-
   //click Create an Account!
   $('#createAccount').click(createAccount);
-
   //click 'add new contact' and unhide the form
-  //$('#addContact').click($('#contactForm').toggle());
-
-  //click on the submit button and send the form
+  $('#addContact').click(function(event){
+    $('#contactForm').toggle();
+    $('#addContact').toggle();
+  });
+  //click on the submit button and send the contact form
   $('#submitContact').click(sendContactForm);
-
   //event handler for remove button has to happen on #target
   $('#target').on('click', '.delete', banishFriend);
+  //click on logout to logout!
+  $('#logout').click(logout);
 
-  //get the data of people already in firebase
-  getData();
+}
+
+//logout
+function logout (event) {
+  fb.unauth();
+  location.reload(true);
 }
 
 //authorize,login the user and remove the login form
@@ -51,8 +71,22 @@ function authMe (event) {
       };
   fb.authWithPassword(loginObj, function(error, authData) {
     if (error) {
+      alert('Rejected!!', error)
       console.log("Login Failed!", error);
     } else {
+      //hide the login
+      $('#loginForm').toggle();
+      //show the add contact button
+      $('#addContact').toggle();
+      //show the contact list
+      $('.tableHeader').toggle();
+      $('#target').toggle();
+
+      usersFbUrl = FIREBASE_URL + '/users/' + fb.getAuth().uid + '/data';
+
+      //get the data already in firebase
+      getData();
+
       console.log("Authenticated successfully with payload:", authData);
     }
   });
@@ -101,7 +135,7 @@ function banishFriend (event) {
 
 //get the data
 function getData () {
-  $('#target').empty();
+  // $('#target').empty();
   $.get(usersFbUrl + '/contacts.json', function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadFriend(uuid, resFB[uuid]);
@@ -151,12 +185,9 @@ function sendContactForm(event) {
   $('input').val('');
 
   //hide the form
-  $('#contactForm').toggle();
-  //show the add contact button
+   $('#contactForm').toggle();
+   //show the add contact button
   $('#addContact').toggle();
-  //show the contact list
-  $('.tableHeader').toggle();
-  $('#target').toggle();
 
   //add info to the contact list.. by load friend??
   getData();
