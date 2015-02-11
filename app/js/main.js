@@ -1,4 +1,12 @@
 //use dev tool for iife??
+/* jshint node: true */
+
+'use strict'
+
+var $ = require('jquery'),
+    _ = require('lodash'),
+    Firebase = require('firebase');
+
 var FIREBASE_URL = 'https://little-black-book.firebaseio.com/',
     fb = new Firebase(FIREBASE_URL),
     usersFbUrl;
