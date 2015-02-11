@@ -104,6 +104,7 @@ function createAccount (event) {
   fb.createUser(loginObj, function(error) {
     if (error === null) {
       //login the user
+      authMe(event);
       console.log("User created successfully");
     } else {
       alert("REJECTED!!");
@@ -111,9 +112,13 @@ function createAccount (event) {
     }
   });
   //hide the login form
-  $('#loginForm').toggle();
+  //$('#loginForm').toggle();
   //show contact form
   $('#contactForm').toggle();
+  //hide add contact button
+  $('#addContact').toggle();
+  //hide the contact list ... they do not have one yet!
+  $('.tableHeader').toggle();
 }
 
 //unhide the login form and hides the login button
@@ -135,7 +140,7 @@ function banishFriend (event) {
 
 //get the data
 function getData () {
-  // $('#target').empty();
+  $('#target').empty();
   $.get(usersFbUrl + '/contacts.json', function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadFriend(uuid, resFB[uuid]);
